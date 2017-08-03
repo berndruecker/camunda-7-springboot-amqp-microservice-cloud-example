@@ -123,6 +123,10 @@ public class OrderProcessTest {
       // again: use the real thing like receiving the real AMQP message, return a dummy shipmentId
       amqpReceiver.handleGoodsShippedEvent(orderId, "0815");
     });    
+
+    when(orderProcess.waitsAtTimerIntermediateEvent(anyString())).thenReturn((processInstance) -> {
+      processInstance.defer("PT10M", () -> {fail("Timer should have fired in the meanwhile");}); 
+    });
     
     // OK - everything prepared - let's go
     Scenario scenario = starter.execute();

@@ -15,14 +15,22 @@
       <bpmn:outgoing>SequenceFlow_12j6m4a</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:endEvent id="EndEvent_OrderShipped" name="Order shipped">
-      <bpmn:incoming>SequenceFlow_13f7q4z</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0e88tbe</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_12j6m4a" sourceRef="ServiceTask_ShipGoods" targetRef="ReceiveTask_WaitForGoodsShipped" />
-    <bpmn:sequenceFlow id="SequenceFlow_13f7q4z" sourceRef="ReceiveTask_WaitForGoodsShipped" targetRef="EndEvent_OrderShipped" />
+    <bpmn:sequenceFlow id="SequenceFlow_13f7q4z" sourceRef="ReceiveTask_WaitForGoodsShipped" targetRef="IntermediateThrowEvent_10qjrod" />
     <bpmn:receiveTask id="ReceiveTask_WaitForGoodsShipped" name="Wait for goods shipped" messageRef="Message_1qt9m10">
       <bpmn:incoming>SequenceFlow_12j6m4a</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_13f7q4z</bpmn:outgoing>
     </bpmn:receiveTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0e88tbe" sourceRef="IntermediateThrowEvent_10qjrod" targetRef="EndEvent_OrderShipped" />
+    <bpmn:intermediateCatchEvent id="IntermediateThrowEvent_10qjrod" name="Wait 5 minutes">
+      <bpmn:incoming>SequenceFlow_13f7q4z</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0e88tbe</bpmn:outgoing>
+      <bpmn:timerEventDefinition>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT5M</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
     <bpmn:textAnnotation id="TextAnnotation_1b1jpxr">    <bpmn:text>REST</bpmn:text>
 </bpmn:textAnnotation>
     <bpmn:association id="Association_0cosab0" sourceRef="ServiceTask_RetrievePayment" targetRef="TextAnnotation_1b1jpxr" />
@@ -87,9 +95,9 @@
         <di:waypoint xsi:type="dc:Point" x="533" y="38" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="EndEvent_0sl0ttw_di" bpmnElement="EndEvent_OrderShipped">
-        <dc:Bounds x="748.5470737913486" y="102" width="36" height="36" />
+        <dc:Bounds x="867.5470737913486" y="102" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="732" y="142" width="70" height="12" />
+          <dc:Bounds x="851" y="142" width="70" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_12j6m4a_di" bpmnElement="SequenceFlow_12j6m4a">
@@ -101,9 +109,9 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_13f7q4z_di" bpmnElement="SequenceFlow_13f7q4z">
         <di:waypoint xsi:type="dc:Point" x="679" y="120" />
-        <di:waypoint xsi:type="dc:Point" x="749" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="739" y="120" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="714" y="99" width="0" height="12" />
+          <dc:Bounds x="709" y="99" width="0" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ReceiveTask_0n6vzra_di" bpmnElement="ReceiveTask_WaitForGoodsShipped">
@@ -116,6 +124,19 @@
         <di:waypoint xsi:type="dc:Point" x="658" y="80" />
         <di:waypoint xsi:type="dc:Point" x="689" y="38" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0e88tbe_di" bpmnElement="SequenceFlow_0e88tbe">
+        <di:waypoint xsi:type="dc:Point" x="775" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="868" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="821.5" y="99" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="IntermediateCatchEvent_1x7nn5e_di" bpmnElement="IntermediateThrowEvent_10qjrod">
+        <dc:Bounds x="739" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="721" y="142" width="71" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
