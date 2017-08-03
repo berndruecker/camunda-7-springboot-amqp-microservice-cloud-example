@@ -1,0 +1,10 @@
+---
+applications:
+  - name: camunda-spring-boot-amqp-microservice-cloud-example
+    memory: 1G
+    instances: 1
+    random-route: false
+
+services:
+  - cloud-amqp
+  - camunda-db
