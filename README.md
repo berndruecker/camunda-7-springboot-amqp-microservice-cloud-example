@@ -146,7 +146,17 @@ Now you can easily deploy the application using the [CloudFoundry CLI](https://d
 mvn clean install && cf push -p target/camunda-spring-boot-amqp-microservice-cloud-example-0.0.1-SNAPSHOT.jar
 ```
 
-There it is. The URL to access the Camunda web applications and your REST-API depends on various factors, but will be shown via the console:
+There it is, now you can start a process:
+
+```shell
+url -X POST -F 'orderId=123' -F 'amount=4990' http://camunda-spring-boot-amqp-microservice-cloud-example.cfapps.io/order
+```
+
+And will see it in cockpit:
+
+![Cockpit](docs/cockpit.png)
+
+The URL to access the Camunda web applications and your REST-API depends on various factors, but will be shown via the Pivotal console:
 
 ![Test Coverage](docs/pivotalConsole.png)
 
