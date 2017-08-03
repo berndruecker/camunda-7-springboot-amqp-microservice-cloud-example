@@ -40,9 +40,50 @@ Please have a look at the [pom.xml](pom.xml) for details. Also note the [Applica
 
 # Testing
 
-One extremly interessting piece is the JUnit test case, which does a complete run-thorugh the process, including all Java code attached to the process, but without sending any real AMQP message or REST request. The timeout of a waiting period in the process is also simulated. Refer to the [OrderProcessTest.java](src/main/java/com/camunda/demo/springboot/OrderProcessTest.java) for details. Note that the test generates a graphical report:
+One extremly interessting piece is the JUnit test case, which does a complete run-thorugh the process, including all Java code attached to the process, but without sending any real AMQP message or REST request. The timeout of a waiting period in the process is also simulated. 
 
-![Test Coverage(docs/testCoverage.png)
+```java
+    StartingByStarter starter = Scenario.run(orderProcess) //
+      .startBy(() -> {
+        return orderRestController.placeOrder(orderId, 547);
+      });
+    
+    // expect the charge for retrieving payments to be created correctly and return a dummy transactionId
+    mockRestServer
+        .expect(requestTo("http://api.example.org:80/payment/charges")) //
+        .andExpect(method(HttpMethod.POST))
+        .andExpect(jsonPath("amount").value("547"))
+        .andRespond(withSuccess("{\"transactionId\": \"12345\"}", MediaType.APPLICATION_JSON));
+    
+    when(orderProcess.waitsAtReceiveTask("ReceiveTask_WaitForGoodsShipped")).thenReturn((messageSubscription) -> {
+      amqpReceiver.handleGoodsShippedEvent(orderId, "0815");
+    });    
+
+    when(orderProcess.waitsAtTimerIntermediateEvent(anyString())).thenReturn((processInstance) -> {
+      processInstance.defer("PT10M", () -> {fail("Timer should have fired in the meanwhile");}); 
+    });
+    
+    // OK - everything prepared - let's go
+    Scenario scenario = starter.execute();
+    
+    mockRestServer.verify();
+
+    // and very that some things happened
+    assertThat(scenario.instance(orderProcess)).variables().containsEntry(ProcessConstants.VARIABLE_paymentTransactionId, "12345");
+    assertThat(scenario.instance(orderProcess)).variables().containsEntry(ProcessConstants.VAR_NAME_shipmentId, "0815");
+
+    {
+      ArgumentCaptor<Message> argument = ArgumentCaptor.forClass(Message.class);
+      verify(rabbitTemplate, times(1)).convertAndSend(eq("shipping"), eq("createShipment"), argument.capture());
+      assertEquals(orderId, argument.getValue());
+    }
+
+    verify(orderProcess).hasFinished("EndEvent_OrderShipped");
+```
+
+Refer to the [OrderProcessTest.java](src/main/java/com/camunda/demo/springboot/OrderProcessTest.java) for all details. Note that the test generates a graphical report:
+
+![Test Coverage](docs/testCoverage.png)
 
 
 
@@ -107,6 +148,6 @@ mvn clean install && cf push -p target/camunda-spring-boot-amqp-microservice-clo
 
 There it is. The URL to access the Camunda web applications and your REST-API depends on various factors, but will be shown via the console:
 
-![Test Coverage(docs/pivotalConsole.png)
+![Test Coverage](docs/pivotalConsole.png)
 
-![Test Coverage(docs/pivotalConsole2.png)
+![Test Coverage](docs/pivotalConsole2.png)
