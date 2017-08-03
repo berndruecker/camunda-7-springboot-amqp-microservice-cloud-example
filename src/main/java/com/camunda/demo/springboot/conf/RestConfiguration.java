@@ -25,7 +25,7 @@ public class RestConfiguration {
     MappingJackson2HttpMessageConverter jsonMessageConverter = new MappingJackson2HttpMessageConverter();
     jsonMessageConverter.setObjectMapper(objectMapper);
     messageConverters.add(jsonMessageConverter);
-    restTemplate.setMessageConverters(messageConverters); // This line was missing, but needs to be here. See answer.
+    restTemplate.setMessageConverters(messageConverters);
     return restTemplate;
   }
 }
