@@ -17,10 +17,9 @@ The business example is a very simple order fullfillment microservice (motivated
 
 # Embedded engine
 
-With Camunda it is possible to run the engine as part of your application or microservice. This is called [embedded engine](https://docs.camunda.org/manual/latest/introduction/architecture/#embedded-process-engine). This is especially helpful in microservice architectures if you develop in Java, then the engine simply gets a library helping you to define flows with persistent state and subsequent requirements like timeout handling, retrying, compensation and so on. See [Why service collaboration needs choreography AND orchestration](https://blog.bernd-ruecker.com/why-service-collaboration-needs-choreography-and-orchestration-239c4f9700fa) for a background reading.
+With Camunda it is possible to run the engine as part of your application or microservice. This is called [embedded engine](https://docs.camunda.org/manual/latest/introduction/architecture/#embedded-process-engine). This is especially helpful in microservice architectures if you develop in Java, then the engine simply gets a library helping you to define flows with persistent state and subsequent requirements like timeout handling, retrying, compensation and so on. See [Why service collaboration needs choreography AND orchestration](https://blog.bernd-ruecker.com/why-service-collaboration-needs-choreography-and-orchestration-239c4f9700fa) for background reading.
 
 ![Embedded engine](docs/embeddedEngine.png)
-
 
 
 # Project setup
@@ -37,6 +36,20 @@ The project uses
 - PostgreSQL/ElephantDB as cloud storage on Pivotal Web Services
 
 Please have a look at the [pom.xml](pom.xml) for details. Also note the [Application.java](src/main/java/com/camunda/demo/springboot/Application.java) as Spring Boot starter class.
+
+
+# Configuration of Camunda
+
+With Spring Boot Camunda gets auto-configured using defaults. You can easily change the configuration by providing classes according to the [docs](https://camunda.github.io/camunda-bpm-spring-boot-starter/docs/2.1.2/index.html#_process_engine_configuration). In this example you can see
+
+- [HistoryConfiguration](src/main/java/com/camunda/demo/springboot/conf/CamundaEngineHistoryConfiguration.java) that tells Camunda to save all historic data and audit logs.
+- [IdGenerator](src/main/java/com/camunda/demo/springboot/conf/CamundaIdGeneratorConfiguration.java) so that Camunda uses string UUID's instead of database generated ones, which avoids deadlock risks in cluster environments.
+- [Plugin to write some events to sysout](src/main/java/com/camunda/demo/springboot/conf/plugin/SendEventListener). This plugin registers a listener to get notified when new workflow instances are started or existing ones are eneded. In this codebase just prints a line on the console, but it would be easy to push the event to some central tracing system. The cool thing: Such a plugin could be packaged in an own Maven depedency, as soon it is on the classpath it will be activated and influence the core engine. 
+
+
+# Using Camunda Enterprise Edition
+
+The example uses the community edition to allow for a quick start. It is easy to switch dependencies to use the Enterprise Edition as you can see in [this commit](commit/724e3db5f09f1743445c78d84e28d2fa5c0b6005). Just make sure you can connect to the [Camunda Nexus](https://docs.camunda.org/get-started/apache-maven/#camunda-nexus) using your enterprise credentials.
 
 # Testing
 
