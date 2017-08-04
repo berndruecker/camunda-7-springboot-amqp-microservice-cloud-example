@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+	<logger name="org.camunda.bpm.scenario" level="info" /> <!-- or info -->
+<!-- 
+  	<logger name="org.apache.ibatis" level="debug" /> 
+	<logger name="javax.activation" level="info" />
+  	<logger name="org.camunda" level="info" />
+    <logger name="org.camunda.bpm.engine.test" level="debug" />
+ -->
+<!--
+  <logger name="org.camunda.bpm.engine.bpmn.parser" level="debug" />
+  <logger name="org.camunda.bpm.engine.bpmn.behavior" level="debug" />
+
+  <logger name="org.camunda.bpm.engine.cmmn.transformer" level="debug" />
+  <logger name="org.camunda.bpm.engine.cmmn.behavior" level="debug" />
+  <logger name="org.camunda.bpm.engine.cmmn.operation" level="debug" />
+
+  <logger name="org.camunda.bpm.engine.cmd" level="debug" />
+  <logger name="org.camunda.bpm.engine.persistence" level="debug" />
+  <logger name="org.camunda.bpm.engine.tx" level="debug" />
+  <logger name="org.camunda.bpm.engine.cfg" level="debug" />
+  <logger name="org.camunda.bpm.engine.jobexecutor" level="debug" />
+  <logger name="org.camunda.bpm.engine.context" level="debug" />
+  <logger name="org.camunda.bpm.engine.core" level="debug" />
+  <logger name="org.camunda.bpm.engine.pvm" level="debug" />
+
+  <logger name="org.camunda.bpm.engine.metrics" level="debug" />
+  <logger name="org.camunda.bpm.engine.util" level="debug" />
+
+  <logger name="org.camunda.bpm.application" level="debug" />
+  <logger name="org.camunda.bpm.container" level="debug" />
+-->
+</configuration>
