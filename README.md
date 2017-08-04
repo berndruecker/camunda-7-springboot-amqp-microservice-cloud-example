@@ -23,6 +23,8 @@ With Camunda it is possible to run the engine as part of your application or mic
 
 # Walkthorugh as screencast
 
+This video gives a very quick walk through the example (15 minutes):
+
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=XimowIZLWD8" target="_blank"><img src="http://img.youtube.com/vi/XimowIZLWD8/0.jpg" alt="Walkthrough" width="240" height="180" border="10" /></a>
 
 # Project setup
