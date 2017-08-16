@@ -1,5 +1,10 @@
 package com.camunda.demo.springboot;
 
+import static org.camunda.bpm.engine.authorization.Authorization.ANY;
+import static org.camunda.bpm.engine.authorization.Authorization.AUTH_TYPE_GRANT;
+import static org.camunda.bpm.engine.authorization.Permissions.ALL;
+import static org.camunda.bpm.engine.authorization.Resources.FILTER;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,15 +19,9 @@ import org.camunda.bpm.engine.identity.Group;
 import org.camunda.bpm.engine.identity.User;
 import org.camunda.bpm.spring.boot.starter.annotation.EnableProcessApplication;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import static org.camunda.bpm.engine.authorization.Permissions.*;
-import static org.camunda.bpm.engine.authorization.Resources.*;
-import static org.camunda.bpm.engine.authorization.Authorization.*;
-
 @SpringBootApplication
-@EnableAutoConfiguration
 @EnableProcessApplication
 public class Application {
 
