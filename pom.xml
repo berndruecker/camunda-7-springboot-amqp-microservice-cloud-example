@@ -9,12 +9,10 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<java.version>1.8</java.version>
-		<camunda.version>7.7.0</camunda.version>
-		<!--
-		<camunda.version>7.7.2-ee</camunda.version>
-		-->
-		<spring.boot.version>1.5.2.RELEASE</spring.boot.version>
-		<camunda.spring.boot.version>2.1.2</camunda.spring.boot.version>
+		<camunda.version>7.8.0</camunda.version>
+		<!-- <camunda.version>7.8.2-ee</camunda.version> -->
+		<springBoot.version>1.5.7.RELEASE</springBoot.version>
+		<camundaSpringBoot.version>2.3.0</camundaSpringBoot.version>
 	</properties>
 
 	<dependencyManagement>
@@ -30,54 +28,26 @@
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
-				<version>${spring.boot.version}</version>
+				<version>${springBoot.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-			<dependency>
-				<groupId>org.camunda.bpm.extension.springboot</groupId>
-				<artifactId>camunda-bpm-spring-boot-starter-bom</artifactId>
-				<version>${camunda.spring.boot.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-
-			<!-- Overwrite version for Enterprise Version
-			<dependency>
-				<groupId>org.camunda.bpm.webapp</groupId>
-				<artifactId>camunda-webapp-webjar</artifactId>
-				<version>${camunda.version}</version>
-			</dependency>
-                        -->
 
 		</dependencies>
 	</dependencyManagement>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.camunda.bpm.extension.springboot</groupId>
+			<groupId>org.camunda.bpm.springboot</groupId>
 			<artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
-			<!-- exclude this if you want to use Enterprise Cockpit 
-			<exclusions>
-				<exclusion>
-					<groupId>org.camunda.bpm.webapp</groupId>
-					<artifactId>camunda-webapp-webjar</artifactId>
-				</exclusion>
-			</exclusions>
-			-->
+			<!-- <artifactId>camunda-bpm-spring-boot-starter-webapp-ee</artifactId> -->
+			<version>${camundaSpringBoot.version}</version>
 		</dependency>
-		<!-- and include Enterprise Cockpit, see our Consulting Examples
-		<dependency>
-			<groupId>com.camunda.consulting.webapp</groupId>
-			<artifactId>camunda-webapp-customized-webjar</artifactId>
-			<version>7.7.2</version>
-			<scope>provided</scope>
-		</dependency>
-		-->
 
 		<dependency>
-			<groupId>org.camunda.bpm.extension.springboot</groupId>
-			<artifactId>camunda-bpm-spring-boot-starter</artifactId>
+			<groupId>org.camunda.bpm.springboot</groupId>
+			<artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
+			<version>${camundaSpringBoot.version}</version>
 		</dependency>
 
 		<dependency>
@@ -105,9 +75,9 @@
 			<!-- make sure to use this version as of https://github.com/camunda/camunda-bpm-assert/issues/90 -->
 			<groupId>org.assertj</groupId>
 			<artifactId>assertj-core</artifactId>
-			<version>1.7.1</version>
-			<scope>test</scope>			
+			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.camunda.bpm.extension</groupId>
 			<artifactId>camunda-bpm-assert-scenario</artifactId>
@@ -148,7 +118,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>${spring.boot.version}</version>
+				<version>${springBoot.version}</version>
 				<executions>
 					<execution>
 						<goals>
