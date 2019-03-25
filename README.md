@@ -125,10 +125,16 @@ java -jar target/camunda-spring-boot-amqp-microservice-cloud-example-0.0.1-SNAPS
 Now you can access:
 
 * [Camunda web applications](http://localhost:8080/)
-* [REST API for new orders](http://localhost:8080/orders)
+* [REST API for new orders](http://localhost:8080/order)
+
+```
+curl --request POST -F 'orderId=1' -F 'amount=500' http://localhost:8080/order
+```
+
 * [RabbitMQ Management Console](http://localhost:15672/)
 
 Of course you can also use your favorite IDE.
+
 
 
 
