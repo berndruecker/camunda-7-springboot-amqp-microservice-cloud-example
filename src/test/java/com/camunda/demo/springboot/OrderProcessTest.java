@@ -1,8 +1,10 @@
 package com.camunda.demo.springboot;
 
+import static org.assertj.core.api.Assertions.fail;
+import static org.camunda.bpm.engine.test.assertions.bpmn.BpmnAwareAssertions.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -18,8 +20,6 @@ import javax.annotation.PostConstruct;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
-import org.camunda.bpm.extension.process_test_coverage.junit.rules.TestCoverageProcessEngineRuleBuilder;
-import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.*;
 import org.camunda.bpm.scenario.ProcessScenario;
 import org.camunda.bpm.scenario.Scenario;
 import org.camunda.bpm.scenario.run.ProcessRunner.ExecutableRunner.StartingByStarter;
@@ -35,7 +35,6 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
@@ -48,7 +47,8 @@ import com.camunda.demo.springboot.conf.TestApplication;
 import com.camunda.demo.springboot.rest.OrderRestController;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.NONE, //
+@SpringBootTest( // webEnvironment = WebEnvironment.NONE, 
+  // start web environment to work around https://forum.camunda.org/t/error-executing-upon-starting-within-unit-tests/16376/10
     classes = TestApplication.class, //
     properties = { //
         "camunda.bpm.job-execution.enabled=false", //
@@ -85,8 +85,7 @@ public class OrderProcessTest {
 
   @PostConstruct
   void initRule() {
-    rule =TestCoverageProcessEngineRuleBuilder.create(processEngine).build();
-    // Without Coverage: new ProcessEngineRule(processEngine);
+	rule = new ProcessEngineRule(processEngine);
   }
 
   @Before

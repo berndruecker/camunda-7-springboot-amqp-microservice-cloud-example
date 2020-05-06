@@ -9,10 +9,15 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<java.version>1.8</java.version>
-		<camunda.version>7.10.0</camunda.version>
-		<!-- <camunda.version>7.10.0-ee</camunda.version> -->
-		<springBoot.version>2.1.1.RELEASE</springBoot.version>
-		<camundaSpringBoot.version>3.2.0</camundaSpringBoot.version>
+		
+		<camunda.version>7.12.0</camunda.version>
+		<!-- 
+		Adjust if you want to use Enterprise Edition of Camunda:
+		<camunda.version>7.12.5-ee</camunda.version>
+		Make sure you also switch to the ee webapp dependency below
+		-->
+		<springBoot.version>2.2.5.RELEASE</springBoot.version>
+		<camundaSpringBoot.version>3.4.1</camundaSpringBoot.version>
 	</properties>
 
 	<dependencyManagement>
@@ -94,14 +99,6 @@
 			<groupId>org.camunda.bpm.extension</groupId>
 			<artifactId>camunda-bpm-assert-scenario</artifactId>
 			<version>0.2</version>
-			<scope>test</scope>
-		</dependency>
-
-
-		<dependency>
-			<groupId>org.camunda.bpm.extension</groupId>
-			<artifactId>camunda-bpm-process-test-coverage</artifactId>
-			<version>0.3.0</version>
 			<scope>test</scope>
 		</dependency>
 
