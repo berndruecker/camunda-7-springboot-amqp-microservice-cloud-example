@@ -10,7 +10,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<java.version>1.8</java.version>
 		
-		<camunda.version>7.12.5-ee</camunda.version>
+		<camunda.version>7.12.5</camunda.version>
 		<!-- 
 		Adjust if you want to use Enterprise Edition of Camunda:
 		<camunda.version>7.12.5-ee</camunda.version>
@@ -44,7 +44,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.camunda.bpm.springboot</groupId>
-			<artifactId>camunda-bpm-spring-boot-starter-webapp-ee</artifactId>
+			<artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
 			<!-- <artifactId>camunda-bpm-spring-boot-starter-webapp-ee</artifactId> -->
 			<version>${camundaSpringBoot.version}</version>
 		</dependency>
