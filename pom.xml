@@ -10,10 +10,10 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<java.version>1.8</java.version>
 		
-		<camunda.version>7.12.5</camunda.version>
+		<camunda.version>7.14.0</camunda.version>
 		<!-- 
 		Adjust if you want to use Enterprise Edition of Camunda:
-		<camunda.version>7.12.5-ee</camunda.version>
+		<camunda.version>7.14.0-ee</camunda.version>
 		Make sure you also switch to the ee webapp dependency below
 		-->
 		<springBoot.version>2.2.5.RELEASE</springBoot.version>
@@ -151,9 +151,7 @@
 		<repository>
 			<id>camunda-bpm-nexus-public</id>
 			<name>camunda-bpm-nexus-public</name>
-			<url>
-      https://app.camunda.com/nexus/content/groups/public
-    </url>
+			<url>https://app.camunda.com/nexus/content/groups/public</url>
 		</repository>
 
 	</repositories>

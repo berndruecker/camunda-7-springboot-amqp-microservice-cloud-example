@@ -21,7 +21,7 @@ With Camunda it is possible to run the engine as part of your application or mic
 
 ![Embedded engine](docs/embeddedEngine.png)
 
-# Walkthorugh as screencast
+# Walkthrough as screencast
 
 This video gives a very quick walk through the example (15 minutes):
 
