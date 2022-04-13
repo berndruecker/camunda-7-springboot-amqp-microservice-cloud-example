@@ -1,3 +1,5 @@
+[![Camunda Platform 7](https://img.shields.io/badge/Compatible%20with-Camunda%20Platform%207-26d07c)](https://img.shields.io/badge/Compatible%20with-Camunda%20Platform%207-26d07c)
+
 # Camunda Spring Boot example including REST and AMQP, automated tested and deployable in the cloud
 
 This example shows:
