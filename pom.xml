@@ -88,10 +88,10 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <!-- version 1.7.0 currently required by camunda-bpm-assert -->
+      <!-- version 3.27.7 currently required by camunda-bpm-assert -->
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
-      <version>1.7.0</version>
+      <version>3.27.7</version>
       <scope>test</scope>
 </dependency>
 
